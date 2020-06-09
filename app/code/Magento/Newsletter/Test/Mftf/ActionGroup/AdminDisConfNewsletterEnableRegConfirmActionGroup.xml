@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="AdminDisConfNewsletterEnableRegConfirmActionGroup">
+        <amOnPage url="{{AdminCustomerConfigPage.url('#customer_create_account-link')}}" stepKey="goToCustomerConfig"/>
+        <waitForPageLoad stepKey="waitForCustomerAdminPageLoad"/>
+        <conditionalClick selector="{{AdminStoresCustomerConfigurationSection.createNewAccOpt}}" dependentSelector="{{AdminCustomerConfigSection.customerCreateAccountCheckbox}}" visible="false" stepKey="click1"/>
+        <checkOption selector="{{AdminCustomerConfigSection.customerCreateAccountCheckbox}}" stepKey="checkConfirmCreateAccountCheckbox"/>
+        <scrollToTopOfPage stepKey="scrollToTopBeforeSaveCustomer"/>
+        <click selector="{{AdminMainActionsSection.save}}" stepKey="saveCustomerConfig"/>
+        <waitForElement selector="{{AdminMessagesSection.success}}" stepKey="waitForCustomerSectionSuccessMessage"/>
+        <see selector="{{AdminMessagesSection.success}}" userInput="You saved the configuration." stepKey="seeCustomerConfigSuccess"/>
+        <amOnPage url="{{AdminNewsletterConfigurationPage.url}}" stepKey="amOnNewsletterSubscriptionTab"/>
+        <waitForPageLoad stepKey="waitForNewsletterConfigurationPageLoad"/>
+        <conditionalClick selector="{{AdminNewsletterConfigurationSection.subscriptionOptionsTabLink}}" dependentSelector="{{AdminNewsletterConfigurationSection.subscriptionConfirmCheckbox}}" visible="false" stepKey="click2"/>
+        <checkOption selector="{{AdminNewsletterConfigurationSection.subscriptionConfirmCheckbox}}" stepKey="checkNewsletterConfirmCheckbox"/>
+        <scrollToTopOfPage stepKey="scrollToTopBeforeSaveNewsletter"/>
+        <click selector="{{AdminMainActionsSection.save}}" stepKey="saveNewsletterConfig"/>
+        <waitForElement selector="{{AdminMessagesSection.success}}" stepKey="waitForNewsletterSectionSuccessMessage"/>
+        <see selector="{{AdminMessagesSection.success}}" userInput="You saved the configuration." stepKey="seeNewsletterConfigSuccess"/>
+    </actionGroup>
+</actionGroups>

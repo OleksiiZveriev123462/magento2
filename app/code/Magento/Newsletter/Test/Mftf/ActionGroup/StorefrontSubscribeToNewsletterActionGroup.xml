@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="StorefrontSubscribeToNewsletterActionGroup">
+        <arguments>
+            <argument name="email" type="string" defaultValue="{{CustomerEntityOne.email}}"/>
+        </arguments>
+        <amOnPage url="{{StorefrontHomePage.url}}" stepKey="amOnStorefrontPage"/>
+        <waitForPageLoad stepKey="waitForHomePageLoads"/>
+        <fillField selector="{{StorefrontCustomerFooterSection.formSubscribe}}" userInput="{{email}}" stepKey="fillNewsletterField"/>
+        <click selector="{{StorefrontCustomerFooterSection.buttonSubscribe}}" stepKey="clickSubscriptionButton"/>
+        <waitForElementVisible selector="{{StorefrontMessagesSection.success}}" stepKey="waitForSubscriptionSuccess"/>
+        <see selector="{{StorefrontMessagesSection.success}}" userInput="The confirmation request has been sent." stepKey="waitForSubscriptionSuccessMessage"/>
+    </actionGroup>
+</actionGroups>

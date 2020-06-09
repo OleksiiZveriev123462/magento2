@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="CustomTestNewsletter">
+        <annotations>
+            <features value="Newsletter"/>
+            <stories value="Subscribe guest to newsletter"/>
+            <stories value="Create customer"/>
+            <stories value="Subscribe customer to newsletter"/>
+            <testCaseId value="TASK-1"/>
+            <useCaseId value="USECASE-1"/>
+            <group value="Newsletter"/>
+            <title value="Newsletter subscription when user is registered without confirmation"/>
+            <description value="Newsletter confirmation email can't be sent again for customer created from admin panel
+            when registration confirmation is disabled and newsletter confirmation is enabled"/>
+        </annotations>
+        <before>
+            <actionGroup ref="LoginActionGroup" stepKey="loginToAdmin"/>
+            <actionGroup ref="AdminEnableConfNewsletterDisRegConfActionGroup" stepKey="enableConfirmation"/>
+        </before>
+        <after>
+            <actionGroup ref="AdminDisConfNewsletterEnableRegConfirmActionGroup" stepKey="disableConfirmation"/>
+            <actionGroup ref="logout" stepKey="adminLogout"/>
+        </after>
+        <actionGroup ref="StorefrontSubscribeToNewsletterActionGroup" stepKey="subscribeCustomer">
+            <argument name="email" value="{{CustomerEntityOne.email}}"/>
+        </actionGroup>
+        <actionGroup ref="AdminCreateCustomerAndSubscribeActionGroup" stepKey="createAndSubscribeCustomer">
+            <argument name="email" value="{{CustomerEntityOne.email}}"/>
+            <argument name="firstname" value="{{CustomerEntityOne.firstname}}"/>
+            <argument name="lastname" value="{{CustomerEntityOne.lastname}}"/>
+        </actionGroup>
+    </test>
+</tests>
