@@ -4,9 +4,7 @@
     <test name="CustomTestNewsletter">
         <annotations>
             <features value="Newsletter"/>
-            <stories value="Subscribe guest to newsletter"/>
-            <stories value="Create customer"/>
-            <stories value="Subscribe customer to newsletter"/>
+            <stories value="Newsletter subscription"/>
             <testCaseId value="TASK-1"/>
             <useCaseId value="USECASE-1"/>
             <group value="Newsletter"/>
@@ -16,19 +14,22 @@
         </annotations>
         <before>
             <actionGroup ref="LoginActionGroup" stepKey="loginToAdmin"/>
-            <actionGroup ref="AdminEnableConfNewsletterDisRegConfActionGroup" stepKey="enableConfirmation"/>
+            <actionGroup ref="AdminEnableNewsletterConfirmActionGroup" stepKey="disableSubscriptionConfirmation"/>
+            <actionGroup ref="AdminDisableRegistrationConfirmActionGroup" stepKey="enableRegistrationConfirmation"/>
         </before>
         <after>
-            <actionGroup ref="AdminDisConfNewsletterEnableRegConfirmActionGroup" stepKey="disableConfirmation"/>
+            <actionGroup ref="AdminDisableNewsletterConfirmActionGroup" stepKey="disableSubscriptionConfirmation"/>
+            <actionGroup ref="AdminEnableRegistrationConfirmActionGroup" stepKey="enableRegistrationConfirmation"/>
             <actionGroup ref="logout" stepKey="adminLogout"/>
         </after>
         <actionGroup ref="StorefrontSubscribeToNewsletterActionGroup" stepKey="subscribeCustomer">
             <argument name="email" value="{{CustomerEntityOne.email}}"/>
         </actionGroup>
-        <actionGroup ref="AdminCreateCustomerAndSubscribeActionGroup" stepKey="createAndSubscribeCustomer">
+        <actionGroup ref="AdminCreateCustomerActionGroup" stepKey="createCustomerFromAdminGrid">
             <argument name="email" value="{{CustomerEntityOne.email}}"/>
             <argument name="firstname" value="{{CustomerEntityOne.firstname}}"/>
             <argument name="lastname" value="{{CustomerEntityOne.lastname}}"/>
         </actionGroup>
+        <actionGroup ref="AdminSubscribeCustomerFromEditPageActionGroup" stepKey="subscribeCustomerFromEditPage"/>
     </test>
 </tests>

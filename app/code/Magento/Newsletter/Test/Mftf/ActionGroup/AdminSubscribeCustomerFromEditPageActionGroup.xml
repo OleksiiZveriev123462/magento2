@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="AdminSubscribeCustomerFromEditPageActionGroup">
+        <click selector="{{AdminEditCustomerInformationSection.newsLetter}}" stepKey="clickNewsletterTab"/>
+        <waitForPageLoad stepKey="waitForNewsletterTabToOpen"/>
+        <checkOption selector="{{AdminEditCustomerNewsletterSection.subscribedToNewsletter}}" stepKey="checkSubscribeToNewsletterCheckbox"/>
+        <scrollToTopOfPage stepKey="scrollToTopBeforeSubscribeCustomer"/>
+        <click selector="{{AdminMainActionsSection.saveAndContinue}}" stepKey="clickSaveAndContinueAfterSubscription"/>
+        <waitForElementVisible selector="{{AdminMessagesSection.success}}" stepKey="waitForSuccessSubscription"/>
+        <see selector="{{AdminMessagesSection.success}}" userInput="You saved the customer." stepKey="seeSuccessSubscriptionMessage"/>
+    </actionGroup>
+</actionGroups>
