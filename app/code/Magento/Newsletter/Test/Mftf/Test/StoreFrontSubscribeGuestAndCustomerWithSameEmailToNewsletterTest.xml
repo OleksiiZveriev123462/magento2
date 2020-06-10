@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
-    <test name="CustomTestNewsletter">
+    <test name="StoreFrontSubscribeGuestAndCustomerWithSameEmailToNewsletterTest">
         <annotations>
             <features value="Newsletter"/>
             <stories value="Newsletter subscription"/>
             <testCaseId value="TASK-1"/>
             <useCaseId value="USECASE-1"/>
-            <group value="Newsletter"/>
+            <group value="newsletter"/>
+            <group value="customer"/>
             <title value="Newsletter subscription when user is registered without confirmation"/>
-            <description value="Newsletter confirmation email can't be sent again for customer created from admin panel
-            when registration confirmation is disabled and newsletter confirmation is enabled"/>
+            <description value="Newsletter confirmation email can't be sent again for customer created from admin panel when registration confirmation is disabled and newsletter confirmation is enabled"/>
         </annotations>
         <before>
             <actionGroup ref="LoginActionGroup" stepKey="loginToAdmin"/>
-            <actionGroup ref="AdminEnableNewsletterConfirmActionGroup" stepKey="disableSubscriptionConfirmation"/>
-            <actionGroup ref="AdminDisableRegistrationConfirmActionGroup" stepKey="enableRegistrationConfirmation"/>
+            <actionGroup ref="AdminEnableNewsletterSubscriptionConfirmationActionGroup" stepKey="disableSubscriptionConfirmation"/>
+            <actionGroup ref="AdminDisableCustomerRegistrationConfirmationActionGroup" stepKey="enableRegistrationConfirmation"/>
         </before>
         <after>
-            <actionGroup ref="AdminDisableNewsletterConfirmActionGroup" stepKey="disableSubscriptionConfirmation"/>
-            <actionGroup ref="AdminEnableRegistrationConfirmActionGroup" stepKey="enableRegistrationConfirmation"/>
+            <actionGroup ref="AdminDisableNewsletterSubscriptionConfirmationActionGroup" stepKey="disableSubscriptionConfirmation"/>
+            <actionGroup ref="AdminEnableCustomerRegistrationConfirmationActionGroup" stepKey="enableRegistrationConfirmation"/>
             <actionGroup ref="logout" stepKey="adminLogout"/>
         </after>
         <actionGroup ref="StorefrontSubscribeToNewsletterActionGroup" stepKey="subscribeCustomer">
