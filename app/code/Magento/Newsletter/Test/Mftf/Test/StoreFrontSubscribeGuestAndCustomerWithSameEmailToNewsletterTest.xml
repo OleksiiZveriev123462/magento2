@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="StoreFrontSubscribeGuestAndCustomerWithSameEmailToNewsletterTest">
+        <annotations>
+            <features value="Newsletter"/>
+            <stories value="Newsletter subscription"/>
+            <testCaseId value="TASK-1"/>
+            <useCaseId value="USECASE-1"/>
+            <group value="newsletter"/>
+            <group value="customer"/>
+            <title value="Newsletter subscription when user is registered without confirmation"/>
+            <description value="Newsletter confirmation email can't be sent again for customer created from admin panel when registration confirmation is disabled and newsletter confirmation is enabled"/>
+        </annotations>
+        <before>
+            <actionGroup ref="LoginActionGroup" stepKey="loginToAdmin"/>
+            <actionGroup ref="AdminEnableNewsletterSubscriptionConfirmationActionGroup" stepKey="disableSubscriptionConfirmation"/>
+            <actionGroup ref="AdminDisableCustomerRegistrationConfirmationActionGroup" stepKey="enableRegistrationConfirmation"/>
+        </before>
+        <after>
+            <actionGroup ref="AdminDisableNewsletterSubscriptionConfirmationActionGroup" stepKey="disableSubscriptionConfirmation"/>
+            <actionGroup ref="AdminEnableCustomerRegistrationConfirmationActionGroup" stepKey="enableRegistrationConfirmation"/>
+            <actionGroup ref="logout" stepKey="adminLogout"/>
+        </after>
+        <actionGroup ref="StorefrontSubscribeToNewsletterActionGroup" stepKey="subscribeCustomer">
+            <argument name="email" value="{{CustomerEntityOne.email}}"/>
+        </actionGroup>
+        <actionGroup ref="AdminCreateCustomerActionGroup" stepKey="createCustomerFromAdminGrid">
+            <argument name="email" value="{{CustomerEntityOne.email}}"/>
+            <argument name="firstname" value="{{CustomerEntityOne.firstname}}"/>
+            <argument name="lastname" value="{{CustomerEntityOne.lastname}}"/>
+        </actionGroup>
+        <actionGroup ref="AdminSubscribeCustomerFromEditPageActionGroup" stepKey="subscribeCustomerFromEditPage"/>
+    </test>
+</tests>

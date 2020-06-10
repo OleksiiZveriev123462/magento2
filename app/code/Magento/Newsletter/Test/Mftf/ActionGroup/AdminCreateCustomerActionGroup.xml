@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="AdminCreateCustomerActionGroup">
+        <arguments>
+            <argument name="email" type="string" defaultValue="{{CustomerEntityOne.email}}"/>
+            <argument name="firstname" type="string" defaultValue="{{CustomerEntityOne.firstname}}"/>
+            <argument name="lastname" type="string" defaultValue="{{CustomerEntityOne.lastname}}"/>
+        </arguments>
+        <amOnPage url="{{AdminCustomerPage.url}}" stepKey="amOnAdminCustomerGrid"/>
+        <waitForPageLoad stepKey="waitForAdminCustomerGridLoad"/>
+        <click selector="{{AdminCustomerGridMainActionsSection.addNewCustomer}}" stepKey="addNewCustomer"/>
+        <fillField selector="{{AdminCustomerAccountInformationSection.firstName}}" userInput="{{firstname}}" stepKey="fillFirstName"/>
+        <fillField selector="{{AdminCustomerAccountInformationSection.lastName}}" userInput="{{lastname}}" stepKey="fillLastName"/>
+        <fillField selector="{{AdminCustomerAccountInformationSection.email}}" userInput="{{email}}" stepKey="fillEmail"/>
+        <scrollToTopOfPage stepKey="scrollToTopBeforeCreateCustomer"/>
+        <click selector="{{AdminMainActionsSection.saveAndContinue}}" stepKey="clickSaveCustomerAndContinue"/>
+        <waitForElementVisible selector="{{AdminMessagesSection.success}}" stepKey="waitForCreateCustomerSuccess"/>
+        <see selector="{{AdminMessagesSection.success}}" userInput="You saved the customer." stepKey="seeCreateCustomerSuccessMessage"/>
+    </actionGroup>
+</actionGroups>

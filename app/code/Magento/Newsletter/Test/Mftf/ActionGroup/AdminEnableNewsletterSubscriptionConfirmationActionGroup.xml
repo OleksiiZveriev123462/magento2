@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="AdminEnableNewsletterSubscriptionConfirmationActionGroup">
+        <amOnPage url="{{AdminNewsletterConfigurationPage.url('#newsletter_subscription-link')}}" stepKey="amOnNewsletterConfigurationTab"/>
+        <waitForPageLoad stepKey="waitForNewsletterConfigAdminPageLoad"/>
+        <uncheckOption selector="{{AdminNewsletterConfigurationSection.subscriptionConfirmCheckbox}}" stepKey="uncheckSubscriptionConfirmationCheckbox"/>
+        <selectOption userInput="Yes" selector="{{AdminNewsletterConfigurationSection.subscriptionConfirmSelect}}" stepKey="enableSubscriptionConfirmation"/>
+        <scrollToTopOfPage stepKey="scrollToTopBeforeSaveNewsletterConfig"/>
+        <click selector="{{AdminMainActionsSection.save}}" stepKey="saveNewsletterConfig"/>
+        <waitForElement selector="{{AdminMessagesSection.success}}" stepKey="waitForNewsletterConfigSectionSuccess"/>
+        <see selector="{{AdminMessagesSection.success}}" userInput="You saved the configuration." stepKey="seeNewsletterConfigSuccessMessage"/>
+    </actionGroup>
+</actionGroups>

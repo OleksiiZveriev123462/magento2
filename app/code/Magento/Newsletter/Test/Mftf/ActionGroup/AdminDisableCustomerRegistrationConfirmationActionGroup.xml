@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="AdminDisableCustomerRegistrationConfirmationActionGroup">
+        <amOnPage url="{{AdminCustomerConfigPage.url('#customer_create_account-link')}}" stepKey="amOnCustomerConfigCreateAccountTab"/>
+        <waitForPageLoad stepKey="waitForCustomerConfigAdminPageLoad"/>
+        <uncheckOption selector="{{AdminCustomerConfigSection.customerCreateAccountCheckbox}}" stepKey="uncheckConfirmCreateAccountCheckbox"/>
+        <selectOption userInput="No" selector="{{AdminCustomerConfigSection.customerCreateAccountConfirmSelect}}" stepKey="disableConfirmCreateAccount"/>
+        <scrollToTopOfPage stepKey="scrollToTopBeforeSaveCustomerConfig"/>
+        <click selector="{{AdminMainActionsSection.save}}" stepKey="saveCustomerConfig"/>
+        <waitForElement selector="{{AdminMessagesSection.success}}" stepKey="waitForCustomerConfigSectionSuccess"/>
+        <see selector="{{AdminMessagesSection.success}}" userInput="You saved the configuration." stepKey="seeCustomerConfigSuccessMessage"/>
+    </actionGroup>
+</actionGroups>
